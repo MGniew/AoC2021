@@ -12,8 +12,7 @@ def solve(data, days):
 def main():
     with open("input") as f:
         data = [int(el) for el in f.read().split(",")]
-    data = {el: data.count(el) for el in set(data)}
-    data = {k: (data[k] if k in data else 0) for k in range(9)}
+    data = {el: data.count(el) for el in range(9)}
     solve(data, days=80)
     solve(data, days=256)
 
