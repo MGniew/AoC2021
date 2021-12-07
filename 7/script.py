@@ -14,8 +14,8 @@ def main():
     print(int(sum([abs(d - median) for d in data])))
 
     mean = st.mean(data)
-    mean_up = int(mean - 1/2)
-    mean_down = int(mean + 1/2)
+    mean_up = math.ceil(int(mean - 1/2))
+    mean_down = math.floor(int(mean + 1/2))
 
     print("Part 2:")
     a = sum([get_used_fuel(abs(d - mean_up)) for d in data])
