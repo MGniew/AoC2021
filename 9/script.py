@@ -31,22 +31,23 @@ def locate_minima(data):
     return result
 
 
-def fill_water(x, y, symbol, data, current_result):
+def fill_water(x, y, symbol, data, current_result, visited):
     
-    if (x < 0 or x >= len(data)) or (y < 0 or y >= len(data[0])):
+    if (x, y) in visited:
         return current_result
-    if (x, y) in [item for sublist in current_result.values() for item in sublist]:
+    if (x < 0 or x >= len(data)) or (y < 0 or y >= len(data[0])):
         return current_result
 
     if data[x][y] < 9:
         current_result[symbol] += [(x, y)]
+        visited.append((x, y))
     else:
         return current_result
 
-    current_result = fill_water(x-1, y, symbol, data, current_result)
-    current_result = fill_water(x+1, y, symbol, data, current_result)
-    current_result = fill_water(x, y-1, symbol, data, current_result)
-    current_result = fill_water(x, y+1, symbol, data, current_result)
+    current_result = fill_water(x-1, y, symbol, data, current_result, visited)
+    current_result = fill_water(x+1, y, symbol, data, current_result, visited)
+    current_result = fill_water(x, y-1, symbol, data, current_result, visited)
+    current_result = fill_water(x, y+1, symbol, data, current_result, visited)
 
     return current_result
 
@@ -57,9 +58,10 @@ def solve_part_2(data):
     }
 
     result = dict()
+    visited = list()
     for _min, symbol in minima.items():
         result[symbol] = list()
-        result = fill_water(_min[0], _min[1], symbol, data, result)
+        result = fill_water(_min[0], _min[1], symbol, data, result, visited)
 
     result = {k: len(v) for k, v in result.items()}
     result = sorted(result.items(), key=lambda x: x[1], reverse=True)
