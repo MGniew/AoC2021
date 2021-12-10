@@ -2,12 +2,10 @@
 def incomplete_queue_generator(data):
 
     def match(open_char, close_char):
-        if (
+        return (
             ord(open_char) + 2 == ord(close_char) or
             ord(open_char) + 1 == ord(close_char)
-        ):
-            return True
-        return False
+        )
 
     for line in data:
         queue = []
