@@ -55,7 +55,7 @@ def solve_part_2(data):
 
 
 def main():
-    
+
     data = load_data("input")
 
     print("Solve part 1:", len(solve_part_1(data)))

@@ -33,7 +33,7 @@ def fold(coords, fold):
     axis = 1 if fold[0] == -1 else 0
     axis_value_y = 0 if axis == 1 else fold[axis] + 1
     axis_value_x = 0 if axis == 0 else fold[axis] + 1
-    
+
     if axis == 0:
         new_coords = [[value for value in line] for line in coords[:axis_value_y - 1]]
     else:
