@@ -143,16 +143,14 @@ def solve_part_1(packets):
     return sum([get_sum(pckt) for pckt in packets])
 
 
-def calculate(packets, op, ops=list()):
+def calculate(packets, op):
     
     values = []
     for pckt in packets:
         if pckt.value:
             values.append(pckt.value)
         else:
-            ops.append(pckt.type_id)
-            subop = Operation(pckt.type_id)
-            value = calculate(pckt.subpackets, subop, ops)
+            value = calculate(pckt.subpackets, Operation(pckt.type_id))
             values.append(value)
 
     return op(values)
@@ -160,9 +158,8 @@ def calculate(packets, op, ops=list()):
 
 def solve_part_2(packets):
     pckt = packets[0]
-    ops = [pckt.type_id]
     op = Operation(pckt.type_id)
-    result = calculate(pckt.subpackets, op, ops)
+    result = calculate(pckt.subpackets, op)
     return result
 
 
